@@ -61,6 +61,7 @@ if __name__ == '__main__':
     db = mongoClient.TG_489567076
     tb_perpetual = db["PERPETUAL_SYMBOLS_INFO"]
     tb_delivery = db["DELIVERY_SYMBOLS_INFO"]
+    insert_future_tick_size_table()
     while True:
         collections = db.list_collection_names()
         print ("collections:", collections, "\n")
