@@ -66,8 +66,8 @@ if __name__ == '__main__':
     logging.info(MONGO_URL)
     #insert_future_tick_size_table()
     while True:
-        #collections = db.list_collection_names()
-        #logging.info("collections:", collections, "\n")
+        collections = db.list_collection_names()
+        logging.info("collections:", collections, "\n")
         time.sleep(5)
         logging.info("*********************************************")
 
