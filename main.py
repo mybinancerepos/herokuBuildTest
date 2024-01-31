@@ -37,6 +37,8 @@ def setup_symbol_data(symbol_exchange_info):
         
 def insert_future_tick_size_table():
     try:
+        tb_perpetual.delete_many({})
+        tb_delivery.delete_many({})
         urls = {
             "PERPETUAL": "https://fapi.binance.com/fapi/v1/exchangeInfo",
             "DELIVERY": "https://dapi.binance.com/dapi/v1/exchangeInfo"
@@ -64,7 +66,7 @@ def insert_future_tick_size_table():
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     logging.info(MONGO_URL)
-    #insert_future_tick_size_table()
+    insert_future_tick_size_table()
     while True:
         collections = db.list_collection_names()
         for i in collections:
