@@ -3,7 +3,7 @@
 # Press Shift+F10 to execute it or replace it with your code.
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
 
-import time
+import time, os
 from pymongo import MongoClient
 
 MONGO_URL = os.getenv("MONGO_URL")
