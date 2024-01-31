@@ -68,7 +68,7 @@ if __name__ == '__main__':
     while True:
         collections = db.list_collection_names()
         for i in collections:
-            logging.info("collections:{i}\n")
+            logging.info(f"collections:{i}\n")
         time.sleep(5)
         logging.info("*********************************************")
 
