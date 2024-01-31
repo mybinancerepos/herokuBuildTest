@@ -67,7 +67,7 @@ if __name__ == '__main__':
     #insert_future_tick_size_table()
     while True:
         collections = db.list_collection_names()
-        logging.info("collections:", collections, "\n")
+        logging.info("collections:{collections}\n")
         time.sleep(5)
         logging.info("*********************************************")
 
