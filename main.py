@@ -57,6 +57,7 @@ def insert_future_tick_size_table():
             
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
+    print(MONGO_URL)
     mongoClient = MongoClient(MONGO_URL)
     db = mongoClient.TG_489567076
     tb_perpetual = db["PERPETUAL_SYMBOLS_INFO"]
