@@ -6,11 +6,16 @@
 import time, os, requests, logging
 from pymongo import MongoClient
 
+MONGO_URL = os.getenv("MONGO_URL")
 
+mongoClient = MongoClient(MONGO_URL)
+db = mongoClient.TG_489567076
+tb_perpetual = db["PERPETUAL_SYMBOLS_INFO"]
+tb_delivery = db["DELIVERY_SYMBOLS_INFO"]
 
 def print_hi(name):
     # Use a breakpoint in the code line below to debug your script.
-    logging.info(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
     
 def setup_symbol_data(symbol_exchange_info):
     """
@@ -41,33 +46,28 @@ def insert_future_tick_size_table():
             res = requests.get(url)
             ps = res.json()
             if "msg" in ps:
-                logging.info(f"API error: updateFuturePerpetualTickSizeTable: {ps}")
+                print(f"API error: updateFuturePerpetualTickSizeTable: {ps}")
             else:
                 for t in ps["symbols"]:
                     if cont_type == "PERPETUAL":
-                        pre_arr.append(self.setup_symbol_data(t))
+                        pre_arr.append(setup_symbol_data(t))
                     elif cont_type == "DELIVERY":
-                        del_arr.append(self.setup_symbol_data(t))
+                        del_arr.append(setup_symbol_data(t))
             res.close()
         pre = tb_perpetual.insert_many(pre_arr)
         delv = tb_delivery.insert_many(del_arr)
-        logging.info(f"Futures Symbols Data Re-Updated [{pre.acknowledged}] [{delv.acknowledged}]")
+        print(f"Futures Symbols Data Re-Updated [{pre.acknowledged}] [{delv.acknowledged}]")
     except Exception as e:
-        logging.info(f"recheck_future_tick_size_table: {e}")
+        print(f"recheck_future_tick_size_table: {e}")
             
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    MONGO_URL = os.getenv("MONGO_URL")
-    logging.info(MONGO_URL)
-    mongoClient = MongoClient(MONGO_URL)
-    db = mongoClient.TG_489567076
-    #tb_perpetual = db["PERPETUAL_SYMBOLS_INFO"]
-    #tb_delivery = db["DELIVERY_SYMBOLS_INFO"]
+    print(MONGO_URL)
     #insert_future_tick_size_table()
     while True:
-        collections = db.list_collection_names()
-        logging.info("collections:", collections, "\n")
+        #collections = db.list_collection_names()
+        #print("collections:", collections, "\n")
         time.sleep(5)
-        logging.info("*********************************************")
+        print("*********************************************")
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
