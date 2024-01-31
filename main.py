@@ -68,6 +68,6 @@ if __name__ == '__main__':
         collections = db.list_collection_names()
         print("collections:", collections, "\n")
         time.sleep(5)
-        print("*********************************************)
+        print("*********************************************")
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
