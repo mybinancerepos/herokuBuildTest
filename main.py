@@ -66,7 +66,7 @@ def insert_future_tick_size_table():
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     logging.info(MONGO_URL)
-    insert_future_tick_size_table()
+    # insert_future_tick_size_table()
     while True:
         collections = db.list_collection_names()
         for i in collections:
